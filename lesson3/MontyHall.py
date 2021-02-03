@@ -1,31 +1,44 @@
 import random
-opened_doors = [0, 0, 0]
-prized_doors = [0, 0, 0]
-comp_choice = random.randint(0, 2)
-user_choice = int(input('Enter a number: '))
-prized_doors[comp_choice] = 1
-opened_doors[user_choice] = 1
-doors = []
-for i in range(3):
-    if opened_doors[i] == 0 and prized_doors[i] == 0:
-        doors.append(i)
-opened_door = random.choice(doors)
-opened_doors[opened_door] = -1
-prized_doors[opened_door] = -1
-print('your choice', opened_doors)
-print('comp choice', prized_doors)
-change_door = int(input('Do you want to change the door: [0,1]'))
-is_winner = -1
 
-if change_door == 1:
-    for i in range(3):
-        if opened_doors[i] == 0:
-            is_winner = (prized_doors[i])
-            break
-if change_door == 0:
-    is_winner = (prized_doors[user_choice])
-if is_winner:
-    print('you win')
-else:
-    print('you loose')
 
+class MontyHall:
+    def __init__(self):
+        self.opened_doors = [0, 0, 0]
+        self.prized_doors = [0, 0, 0]
+        self.comp_choice = random.randint(0, 2)
+        self.user_choice = random.randint(0, 2)
+        self.prized_doors[self.comp_choice] = 1
+        self.opened_doors[self.user_choice] = 1
+
+    def open_unprized_door(self):
+        doors = []
+        for i in range(3):
+            if self.opened_doors[i] == 0 and self.prized_doors[i] == 0:
+                doors.append(i)
+        self.opened_door = random.choice(doors)
+        self.opened_doors[self.opened_door] = -1
+        self.prized_doors[self.opened_door] = -1
+
+    def changing_door(self):
+        self.change_door = 1
+        self.is_winner = -1
+
+        if self.change_door == 1:
+            for i in range(3):
+                if self.opened_doors[i] == 0:
+                    self.is_winner = (self.prized_doors[i])
+                    break
+        if self.change_door == 0:
+            self.is_winner = (self.prized_doors[self.user_choice])
+        if self.is_winner:
+            return 1
+        else:
+            return 0
+
+
+counter = 0
+for i in range(10000):
+    monty_hall = MontyHall()
+    monty_hall.open_unprized_door()
+    counter += monty_hall.changing_door()
+print(counter)
