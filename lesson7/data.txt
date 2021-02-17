@@ -1,0 +1,11 @@
+### https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04-ru
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+
+brew services start postgresql  # macos
+
+Data types:
+* boolean [y, yes, no, true, 0,1, False]
+* int, float [100, 100.0]
+* char, varchar(5), text ['q', 'qwerty', 'alskdjfasdofjoqwierqwkenr']
+* timestamp => 16.01.2021
